@@ -123,7 +123,7 @@ public class TestJDBCUtils {
 			// 3.获取执行sql语句对象
 			pstmt = conn.prepareStatement(sql);
 			// 4.设置参数
-			pstmt.setInt(1, 2);
+			pstmt.setInt(1, 1);
 			// 5.执行查询操作
 			rs = pstmt.executeQuery();
 			// 6.处理结果集

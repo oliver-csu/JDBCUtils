@@ -5,12 +5,28 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 /**
  * 提供获取连接和释放资源的 方法
  * 
  */
 public class JDBCUtils {
+	private static String driver;
+	private static String url;
+	private static String username;
+	private static String password;
+	
+	/**
+	 * 静态代码块加载配置文件信息
+	 */
+	static{
+		ResourceBundle bundle = ResourceBundle.getBundle("db");
+		driver = bundle.getString("driver");
+		url = bundle.getString("url");
+		username = bundle.getString("username");
+		password = bundle.getString("password");
+	}
 
 	/**
 	 * 获取连接方法
@@ -20,8 +36,8 @@ public class JDBCUtils {
 	public static Connection getConnection() {
 		Connection conn = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "123456");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, username, password);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
